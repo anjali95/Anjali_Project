@@ -14,7 +14,7 @@ import java.io.UnsupportedEncodingException;
  */
 public class ConvertToString {
 
-    public String toString(InputStream is)
+    public static String toString(InputStream is)
     {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
