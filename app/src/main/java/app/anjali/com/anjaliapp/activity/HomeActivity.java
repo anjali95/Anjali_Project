@@ -14,13 +14,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import app.anjali.com.anjaliapp.R;
+import app.anjali.com.anjaliapp.model.Train;
+import app.anjali.com.anjaliapp.network.Connectivity;
+import app.anjali.com.anjaliapp.util.ConvertToString;
+import app.anjali.com.anjaliapp.util.UrlCreator;
 
 public class HomeActivity extends AppCompatActivity
          {
@@ -30,6 +42,12 @@ public class HomeActivity extends AppCompatActivity
              ProgressBar ploading;
              RelativeLayout rlcontent;
 
+
+             List<Train> liststationname;
+             List<String> liststringstation;
+
+             List<Train> listtrain;
+             List<String> liststringtrain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +74,10 @@ actvsource=(AutoCompleteTextView)findViewById(R.id.input_source);
                 new Search().execute();
             }
         });
+
+        new GetStation().execute();
+
+        new GetTrain().execute();
 
 
     }
@@ -91,5 +113,110 @@ actvsource=(AutoCompleteTextView)findViewById(R.id.input_source);
                  }
              }
 
+             class GetStation extends AsyncTask<Void,Void,Void>
+             {
+                 @Override
+                 protected void onPreExecute() {
+                     super.onPreExecute();
 
+                 }
+
+                 @Override
+                 protected void onPostExecute(Void aVoid) {
+                     super.onPostExecute(aVoid);
+
+                     ArrayAdapter<String> stationadapter=new ArrayAdapter<String>(HomeActivity.this,android.R.layout.simple_list_item_1,liststringstation);
+                     actvsource.setAdapter(stationadapter);
+                     actvdestination.setAdapter(stationadapter);
+                 }
+
+                 @Override
+                 protected Void doInBackground(Void... params) {
+
+
+                  String resultstation =   Connectivity.makeServiceCall(UrlCreator.geturl(0));
+
+                     try {
+                         parsingstation(resultstation);
+                     } catch (JSONException e) {
+                         e.printStackTrace();
+                     }
+
+                     return null;
+                 }
+
+                 private void parsingstation(String resultstation) throws JSONException {
+
+                     JSONObject jo=new JSONObject(resultstation);
+                 JSONArray jarray = jo.getJSONArray("stations");
+
+                     liststationname=new ArrayList<Train>();
+                     liststringstation=new ArrayList<String>();
+
+                     for(int i=0;i<jarray.length();i++)
+                     {
+                       JSONObject jobject=  jarray.getJSONObject(i);
+                   String stationcode =      jobject.getString("station_Code");
+                   String  stationname =     jobject.getString("Station_Name");
+
+                         liststringstation.add(stationname+" - "+stationcode);
+                     }
+
+
+                 }
+             }
+
+
+             class GetTrain extends AsyncTask<Void,Void,Void>
+             {
+                 @Override
+                 protected void onPreExecute() {
+                     super.onPreExecute();
+
+                 }
+
+                 @Override
+                 protected void onPostExecute(Void aVoid) {
+                     super.onPostExecute(aVoid);
+
+                     ArrayAdapter<String> stationadapter=new ArrayAdapter<String>(HomeActivity.this,android.R.layout.simple_list_item_1,liststringtrain);
+                     actvsource.setAdapter(stationadapter);
+                     actvdestination.setAdapter(stationadapter);
+                 }
+
+                 @Override
+                 protected Void doInBackground(Void... params) {
+
+
+                     String resulttrain =   Connectivity.makeServiceCall(UrlCreator.geturl(1));
+
+                     try {
+                         parsingtrain(resulttrain);
+                     } catch (JSONException e) {
+                         e.printStackTrace();
+                     }
+
+                     return null;
+                 }
+
+                 private void parsingtrain(String resultstation) throws JSONException {
+
+                     JSONObject jo=new JSONObject(resultstation);
+                     JSONArray jarray = jo.getJSONArray("trains");
+
+                     liststationname=new ArrayList<Train>();
+                     liststringstation=new ArrayList<String>();
+
+                     for(int i=0;i<jarray.length();i++)
+                     {
+                         JSONObject jobject=  jarray.getJSONObject(i);
+                         String trainno =      jobject.getString("Train_No.");
+                         String  trainname =     jobject.getString("train_Name");
+
+                         liststringtrain.add(trainno+" - "+trainname);
+                     }
+
+
+                 }
+             }
 }

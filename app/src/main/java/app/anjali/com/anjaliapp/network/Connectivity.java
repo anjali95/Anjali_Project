@@ -15,7 +15,7 @@ import app.anjali.com.anjaliapp.util.ConvertToString;
 public class Connectivity {
 
 
-    public String makeServiceCall(String surl) {
+    public static String makeServiceCall(String surl) {
 
         InputStream in = null;
         int resCode = -1;
