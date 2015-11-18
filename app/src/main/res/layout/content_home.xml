@@ -9,4 +9,56 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior" tools:showIn="@layout/app_bar_home"
     tools:context="app.anjali.com.anjaliapp.activity.HomeActivity">
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/rlcontent">
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_source"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <AutoCompleteTextView
+            android:id="@+id/input_source"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Source Station or Code" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_destination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/input_layout_source">
+        <AutoCompleteTextView
+            android:id="@+id/input_destination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Source Station or Code"
+             />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/bsearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Search"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ploading"
+           android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="invisible"
+             />
+
+
+
 </RelativeLayout>
