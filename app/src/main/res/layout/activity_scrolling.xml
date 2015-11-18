@@ -1,32 +1,163 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:fitsSystemWindows="true"
-    tools:context="app.anjali.com.anjaliapp.activity.ScrollingActivity">
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
 
-    <android.support.design.widget.AppBarLayout android:id="@+id/app_bar"
-        android:fitsSystemWindows="true" android:layout_height="@dimen/app_bar_height"
-        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-        <android.support.design.widget.CollapsingToolbarLayout android:id="@+id/toolbar_layout"
-            android:fitsSystemWindows="true" android:layout_width="match_parent"
-            android:layout_height="match_parent" app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="?attr/colorPrimary">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-            <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
-                android:layout_height="?attr/actionBarSize" android:layout_width="match_parent"
-                app:layout_collapseMode="pin" app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+        <android.support.v7.widget.CardView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
 
-    <include layout="@layout/content_scrolling" />
+            android:layout_marginBottom="0dp"
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin" app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end" android:src="@android:drawable/ic_dialog_email" />
+            card_view:cardBackgroundColor="#fff"
+            card_view:cardElevation="10dp">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/header"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:ellipsize="marquee"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:id="@+id/tvtrainno"
+                        android:text="Trainno"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:text="Train Name"
+                        android:id="@+id/tvname"
+                        android:textColor="#0000ff"
+                        android:textSize="16sp"
+
+                        />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#ccc">
+
+                </View>
+
+                <LinearLayout
+                    android:id="@+id/headercontinue"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:ellipsize="marquee"
+                        android:padding="15dp"
+                        android:singleLine="true"
+
+                        android:text="From"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:text="From"
+                        android:id="@+id/tvfrom"
+                        android:textColor="#0000ff"
+                        android:textSize="16sp"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/headercontinuecontinue"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:ellipsize="marquee"
+                        android:padding="15dp"
+                        android:singleLine="true"
+
+                        android:text="To"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:text="TO STATION"
+                        android:id="@+id/tvto"
+                        android:textColor="#0000ff"
+                        android:textSize="16sp"
+
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@android:drawable/ic_dialog_map"/>
 
 </android.support.design.widget.CoordinatorLayout>
+
+

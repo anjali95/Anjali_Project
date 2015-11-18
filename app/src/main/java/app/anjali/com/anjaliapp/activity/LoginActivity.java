@@ -30,10 +30,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import app.anjali.com.anjaliapp.R;
+import app.anjali.com.anjaliapp.model.Train;
+import app.anjali.com.anjaliapp.network.Connectivity;
+import app.anjali.com.anjaliapp.util.UrlCreator;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -54,16 +61,15 @@ public class LoginActivity extends AppCompatActivity
         setContentView(R.layout.activity_login);
 
 
-        etemail=(EditText)findViewById(R.id.email);
-        etpassword=(EditText)findViewById(R.id.epassword);
-        blogin=(Button)findViewById(R.id.blogin);
-        tvlinkregister=(TextView)findViewById(R.id.tvregisterlink);
+        etemail = (EditText) findViewById(R.id.email);
+        etpassword = (EditText) findViewById(R.id.epassword);
+        blogin = (Button) findViewById(R.id.blogin);
+        tvlinkregister = (TextView) findViewById(R.id.tvregisterlink);
 
         blogin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-Intent i=new Intent(LoginActivity.this,HomeActivity.class);
-                startActivity(i);
+                new LoginAttempt().execute();
             }
         });
 
@@ -71,15 +77,64 @@ Intent i=new Intent(LoginActivity.this,HomeActivity.class);
         tvlinkregister.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(i);
             }
         });
-        
 
+    }
+        class LoginAttempt extends AsyncTask<Void,Void,Void>
+        {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+
+
+
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+
+/*
+                String resultlogin =   Connectivity.makeServiceCall(UrlCreator.geturl(0));
+
+                try {
+                    parsinglogin(resultlogin);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+*/
+
+                Intent i=new Intent(LoginActivity.this,HomeActivity.class);
+                startActivity(i);
+                finish();
+
+
+                return null;
+            }
+
+            private void parsinglogin(String resultlogin) throws JSONException {
+
+                JSONObject jo=new JSONObject(resultlogin);
+
+
+
+
+            }
+        }
 
 
     }
 
 
-}
+
 
