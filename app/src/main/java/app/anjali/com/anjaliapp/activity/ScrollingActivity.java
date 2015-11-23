@@ -1,5 +1,7 @@
 package app.anjali.com.anjaliapp.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.anjali.com.anjaliapp.MapsActivity;
 import app.anjali.com.anjaliapp.R;
 import app.anjali.com.anjaliapp.adapter.InfoAdapter;
 import app.anjali.com.anjaliapp.model.Train;
@@ -60,8 +63,24 @@ public class ScrollingActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if(tslist!=null) {
+                    Intent j = new Intent(ScrollingActivity.this, MapsActivity.class);
+
+                    String[] location=new String[tslist.size()];
+
+                    for(int i=0;i<tslist.size();i++)
+                    {
+                        location[i]=tslist.get(i).getStationname();
+                    }
+
+                    j.putExtra("trains",location);
+
+                    startActivity(j);
+
+
+                }
+
+
             }
         });
 

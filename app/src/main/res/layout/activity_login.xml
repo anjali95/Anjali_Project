@@ -14,7 +14,7 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/emailid"
-        android:hint="Emailid"
+        android:hint="userid"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="72dp" />

@@ -38,7 +38,7 @@
             android:id="@+id/input_destination"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Source Station or Code"
+            android:hint="Destination Station or Code"
              />
     </android.support.design.widget.TextInputLayout>
 

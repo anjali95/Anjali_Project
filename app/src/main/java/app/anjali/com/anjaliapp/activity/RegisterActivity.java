@@ -1,11 +1,14 @@
 package app.anjali.com.anjaliapp.activity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +21,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText etemailid,etpassword,etphone;
     Button bregister;
+
+    String semailid,spassword,sphone;
+
+    ProgressDialog pdialog;
 
 
     @Override
@@ -34,34 +41,50 @@ public class RegisterActivity extends AppCompatActivity {
         bregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-new RegisterAttempt().execute();
+
+                semailid=etemailid.getText().toString();
+                spassword=etpassword.getText().toString();
+                sphone=etphone.getText().toString();
+
+
+                new RegisterAttempt().execute();
             }
         });
     }
 
-    class RegisterAttempt extends AsyncTask<Void,Void,Void>
+    class RegisterAttempt extends AsyncTask<Void,String,String>
     {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
+            pdialog=new ProgressDialog(RegisterActivity.this);
+            pdialog.setMessage("Please wait...");
+            pdialog.setCancelable(true);
+            pdialog.show();
+
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
+        protected void onPostExecute(String aVoid) {
             super.onPostExecute(aVoid);
+pdialog.dismiss();;
+if(aVoid!=null)
+{
+    Toast.makeText(RegisterActivity.this,aVoid,Toast.LENGTH_SHORT).show();;
+}
 
 
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected String doInBackground(Void... params) {
 
 
-            String resultregister =   Connectivity.makeServiceCall(UrlCreator.geturl(1));
+            String resultregister =   Connectivity.makeServiceCall(UrlCreator.geturl(1) + "?emailid=" + semailid + "&password=" + spassword + "&phone=" + sphone);
 
             try {
-                parsingresult(resultregister);
+             return    parsingresult(resultregister);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -69,11 +92,20 @@ new RegisterAttempt().execute();
             return null;
         }
 
-        private void parsingresult(String resultregister) throws JSONException {
+        private String parsingresult(String resultregister) throws JSONException {
 
-            JSONObject jo=new JSONObject(resultregister);
+            JSONObject jo = new JSONObject(resultregister);
 
+            int x = jo.getInt("success");
 
+            if (x == 1) {
+                Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
+                return "registration successfull";
+            } else {
+                return "registration failed";
+            }
 
 
         }

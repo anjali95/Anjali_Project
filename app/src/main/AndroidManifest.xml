@@ -36,18 +36,19 @@
         </activity>
         <activity
             android:name=".activity.ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
+            android:label="Train Info"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
-        <activity android:name=".activity.RegisterActivity" >
+        <activity android:name=".activity.RegisterActivity"
+            android:label="@string/title_activity_enquiry">
         </activity>
         <activity
             android:name=".activity.EnquiryActivity"
-            android:label="@string/title_activity_enquiry"
+            android:label="Train Enquiry"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
